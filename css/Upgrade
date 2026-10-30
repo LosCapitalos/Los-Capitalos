@@ -1,0 +1,126 @@
+
+/* =====================================
+   LOS CAPITALOS - UPGRADES
+===================================== */
+
+#upgrades {
+    padding-bottom: 100px;
+}
+
+#upgrades-content {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    padding: 16px;
+}
+
+.upgrade-category {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.upgrade-category h3 {
+    margin: 0;
+    color: #f2c76b;
+    font-size: 17px;
+}
+
+.upgrade-list {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.upgrade-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 15px;
+    background: linear-gradient(135deg,#202d45,#172238);
+}
+
+.upgrade-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: rgba(232,184,75,.12);
+    color: #f2c76b;
+    font-size: 22px;
+}
+
+.upgrade-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.upgrade-info h4 {
+    margin: 0 0 5px;
+    color: #f2c76b;
+    font-size: 14px;
+}
+
+.upgrade-info p {
+    margin: 0;
+    color: #9eacc2;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.upgrade-level {
+    margin-top: 6px;
+    color: #aebbd0;
+    font-size: 11px;
+}
+
+.upgrade-buy {
+    flex-shrink: 0;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(135deg,#f3cb73,#c99435);
+    color: #172033;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.upgrade-buy:disabled {
+    background: #39465b;
+    color: #9eacc2;
+}
+
+.upgrade-progress {
+    height: 6px;
+    margin-top: 9px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #0e1728;
+}
+
+.upgrade-progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 10px;
+    background: #e6b957;
+}
+
+@media(max-width:360px) {
+    #upgrades-content {
+        padding: 12px;
+    }
+
+    .upgrade-card {
+        padding: 12px;
+        gap: 9px;
+    }
+
+    .upgrade-buy {
+        padding: 9px;
+    }
+}
