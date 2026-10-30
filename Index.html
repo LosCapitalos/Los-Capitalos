@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10151d">
+<title>Los Capitalos</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #10151d;
+  color: #f3f5f7;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 24px 18px;
+  background: #18212c;
+  border-bottom: 1px solid #34404e;
+}
+
+h1 {
+  margin: 0;
+  color: #e9b95b;
+  font-size: 27px;
+  letter-spacing: 2px;
+}
+
+header p {
+  color: #9daaba;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+main {
+  max-width: 650px;
+  margin: auto;
+  padding: 18px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.panel {
+  background: #1b2633;
+  border: 1px solid #344354;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.label {
+  font-size: 11px;
+  color: #9daaba;
+}
+
+.value {
+  font-size: 23px;
+  font-weight: bold;
+  margin-top: 8px;
+  color: #f3c66e;
+  overflow-wrap: anywhere;
+}
+
+.click-area {
+  text-align: center;
+  padding: 30px 10px;
+}
+
+#earn {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 5px solid #e9b95b;
+  background: #26384a;
+  color: #f3c66e;
+  font-size: 25px;
+  font-weight: bold;
+  box-shadow: 0 0 25px #d69e3b33;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+#earn:active {
+  transform: scale(.94);
+}
+
+h2 {
+  font-size: 18px;
+  margin: 22px 0 12px;
+}
+
+.business {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 15px;
+  background: #1b2633;
+  border: 1px solid #344354;
+  border-radius: 12px;
+}
+
+.business h3 {
+  font-size: 15px;
+  margin: 0 0 7px;
+}
+
+.business p {
+  font-size: 12px;
+  color: #9daaba;
+  margin: 4px 0;
+}
+
+.buy {
+  background: #e9b95b;
+  border: 0;
+  border-radius: 8px;
+  padding: 11px;
+  color: #17202b;
+  font-weight: bold;
+  min-width: 95px;
+  cursor: pointer;
+}
+
+.buy:disabled {
+  background: #596574;
+  color: #c5cbd2;
+  cursor: not-allowed;
+}
+
+footer {
+  text-align: center;
+  color: #718092;
+  font-size: 11px;
+  padding: 25px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>LOS CAPITALOS</h1>
+  <p>BUILD YOUR EMPIRE. CONTROL THE MARKET.</p>
+</header>
+
+<main>
+
+  <div class="stats">
+
+    <div class="panel">
+      <div class="label">AVAILABLE CASH</div>
+      <div class="value" id="cash">$0</div>
+    </div>
+
+    <div class="panel">
+      <div class="label">PASSIVE INCOME / SEC</div>
+      <div class="value" id="income">$0</div>
+    </div>
+
+    <div class="panel">
+      <div class="label">COMPANY VALUE</div>
+      <div class="value" id="networth">$0</div>
+    </div>
+
+    <div class="panel">
+      <div class="label">TOTAL CLICKS</div>
+      <div class="value" id="clicks">0</div>
+    </div>
+
+  </div>
+
+  <div class="click-area">
+    <p style="color:#9daaba">
+      Tap to generate capital
+    </p>
+
+    <button id="earn">+ CASH</button>
+
+    <p style="font-size:12px;color:#9daaba">
+      Each click: <span id="clickpower">$1</span>
+    </p>
+  </div>
+
+  <h2>BUSINESS MARKET</h2>
+
+  <div id="businesses"></div>
+
+  <h2>UPGRADES</h2>
+
+  <div class="business">
+    <div>
+      <h3>Better Strategy</h3>
+      <p>Increase click income by 1</p>
+      <p>Level: <span id="upgradelevel">0</span></p>
+    </div>
+
+    <button class="buy" id="upgrade">
+      Upgrade · $100
+    </button>
+  </div>
+
+  <footer>
+    LOS CAPITALOS · EARLY ACCESS PROTOTYPE
+  </footer>
+
+</main>
+
+<script>
+
+const initialBusinesses = [
+  {
+    name: "Coffee Shop",
+    sector: "Retail",
+    cost: 50,
+    income: 1,
+    owned: 0
+  },
+  {
+    name: "Delivery Company",
+    sector: "Logistics",
+    cost: 250,
+    income: 5,
+    owned: 0
+  },
+  {
+    name: "Tech Startup",
+    sector: "Technology",
+    cost: 1000,
+    income: 20,
+    owned: 0
+  },
+  {
+    name: "Investment Firm",
+    sector: "Finance",
+    cost: 5000,
+    income: 100,
+    owned: 0
+  }
+];
+
+function loadGame() {
+  try {
+    const saved = localStorage.getItem("losCapitalos");
+
+    if (saved) {
+      const data = JSON.parse(saved);
+
+      if (
+        data &&
+        Array.isArray(data.businesses) &&
+        data.businesses.length === initialBusinesses.length
+      ) {
+        return data;
+      }
+    }
+  } catch (error) {
+    console.log("Save could not be loaded.");
+  }
+
+  return {
+    cash: 0,
+    clicks: 0,
+    power: 1,
+    upgradeLevel: 0,
+    businesses: initialBusinesses.map(b => ({...b}))
+  };
+}
+
+let game = loadGame();
+
+function money(number) {
+  return "$" + Math.floor(number).toLocaleString("en-US");
+}
+
+function income() {
+  return game.businesses.reduce(
+    (sum, business) =>
+      sum + business.owned * business.income,
+    0
+  );
+}
+
+function companyValue() {
+  return game.businesses.reduce(
+    (sum, business) =>
+      sum + business.owned * business.cost,
+    0
+  );
+}
+
+function save() {
+  localStorage.setItem(
+    "losCapitalos",
+    JSON.stringify(game)
+  );
+}
+
+function render() {
+
+  document.getElementById("cash").textContent =
+    money(game.cash);
+
+  document.getElementById("income").textContent =
+    money(income());
+
+  document.getElementById("networth").textContent =
+    money(game.cash + companyValue());
+
+  document.getElementById("clicks").textContent =
+    game.clicks.toLocaleString();
+
+  document.getElementById("clickpower").textContent =
+    money(game.power);
+
+  document.getElementById("upgradelevel").textContent =
+    game.upgradeLevel;
+
+  const list = document.getElementById("businesses");
+
+  list.innerHTML = "";
+
+  game.businesses.forEach((business, index) => {
+
+    const item = document.createElement("div");
+    item.className = "business";
+
+    const details = document.createElement("div");
+
+    const title = document.createElement("h3");
+    title.textContent = business.name;
+
+    const sector = document.createElement("p");
+    sector.textContent =
+      business.sector + " · Owned: " + business.owned;
+
+    const rate = document.createElement("p");
+    rate.textContent =
+      money(business.income) + " / second each";
+
+    details.append(title, sector, rate);
+
+    const button = document.createElement("button");
+    button.className = "buy";
+
+    button.textContent =
+      "Buy · " + money(business.cost);
+
+    button.disabled = game.cash < business.cost;
+
+    button.onclick = () => buyBusiness(index);
+
+    item.append(details, button);
+
+    list.appendChild(item);
+
+  });
+
+  const upgradeCost =
+    100 * Math.pow(2, game.upgradeLevel);
+
+  const upgradeButton =
+    document.getElementById("upgrade");
+
+  upgradeButton.textContent =
+    "Upgrade · " + money(upgradeCost);
+
+  upgradeButton.disabled =
+    game.cash < upgradeCost;
+}
+
+function buyBusiness(index) {
+
+  const business = game.businesses[index];
+
+  if (game.cash < business.cost) return;
+
+  game.cash -= business.cost;
+
+  business.owned++;
+
+  business.cost =
+    Math.floor(business.cost * 1.18);
+
+  save();
+  render();
+}
+
+document.getElementById("earn").onclick = () => {
+
+  game.cash += game.power;
+  game.clicks++;
+
+  save();
+  render();
+
+};
+
+document.getElementById("upgrade").onclick = () => {
+
+  const cost =
+    100 * Math.pow(2, game.upgradeLevel);
+
+  if (game.cash < cost) return;
+
+  game.cash -= cost;
+  game.power++;
+  game.upgradeLevel++;
+
+  save();
+  render();
+
+};
+
+setInterval(() => {
+
+  game.cash += income();
+
+  save();
+  render();
+
+}, 1000);
+
+render();
+
+</script>
+
+</body>
+</html>
