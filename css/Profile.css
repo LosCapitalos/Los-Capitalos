@@ -1,0 +1,220 @@
+
+/* =====================================
+   LOS CAPITALOS - PROFILE
+===================================== */
+
+#profile {
+    padding-bottom: 100px;
+}
+
+#profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    padding: 16px;
+}
+
+.profile-card {
+    padding: 20px;
+    border: 1px solid rgba(232,184,75,.25);
+    border-radius: 18px;
+    background: linear-gradient(135deg,#293750,#172238);
+    text-align: center;
+}
+
+.profile-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 12px;
+    border: 2px solid #e6b957;
+    border-radius: 50%;
+    background: #19243a;
+    color: #f2c76b;
+    font-size: 30px;
+}
+
+.profile-card h2 {
+    margin: 0 0 5px;
+    color: #f2c76b;
+    font-size: 20px;
+}
+
+.profile-card p {
+    margin: 0;
+    color: #aebbd0;
+    font-size: 12px;
+}
+
+.profile-level {
+    margin-top: 17px;
+    text-align: left;
+}
+
+.profile-level-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+    color: #aebbd0;
+    font-size: 12px;
+}
+
+.profile-progress {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #0e1728;
+}
+
+.profile-progress-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg,#c99435,#f3cb73);
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 11px;
+}
+
+.profile-stat {
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 14px;
+    background: #19243a;
+}
+
+.profile-stat span {
+    display: block;
+    margin-bottom: 7px;
+    color: #9eacc2;
+    font-size: 12px;
+}
+
+.profile-stat strong {
+    color: #f2c76b;
+    font-size: 17px;
+    overflow-wrap: anywhere;
+}
+
+.profile-section {
+    padding: 17px;
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 15px;
+    background: #19243a;
+}
+
+.profile-section h3 {
+    margin: 0 0 13px;
+    color: #f2c76b;
+    font-size: 16px;
+}
+
+/* LEADERBOARD */
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 11px;
+    background: #222f47;
+}
+
+.leaderboard-rank {
+    color: #f2c76b;
+    font-weight: 800;
+}
+
+.leaderboard-name {
+    flex: 1;
+    color: #e4eaf3;
+    font-size: 13px;
+}
+
+.leaderboard-value {
+    color: #aebbd0;
+    font-size: 12px;
+}
+
+/* TASKS BUBBLE */
+
+.tasks-bubble {
+    position: fixed;
+    right: 16px;
+    bottom: 100px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 57px;
+    height: 57px;
+    border: 2px solid rgba(255,255,255,.2);
+    border-radius: 50%;
+    background: linear-gradient(135deg,#f3cb73,#c99435);
+    color: #172033;
+    font-size: 22px;
+    font-weight: 900;
+    box-shadow: 0 5px 18px rgba(0,0,0,.35);
+    cursor: pointer;
+}
+
+.tasks-bubble:active {
+    transform: scale(.95);
+}
+
+.tasks-panel {
+    position: fixed;
+    right: 14px;
+    bottom: 168px;
+    z-index: 49;
+    width: min(310px,calc(100vw - 28px));
+    max-height: 55vh;
+    overflow-y: auto;
+    padding: 17px;
+    border: 1px solid rgba(232,184,75,.3);
+    border-radius: 16px;
+    background: #19243a;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+}
+
+.tasks-panel h3 {
+    margin: 0 0 13px;
+    color: #f2c76b;
+}
+
+.task-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    color: #dce4ef;
+    font-size: 13px;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+@media(max-width:360px) {
+    #profile-content {
+        padding: 12px;
+    }
+
+    .profile-stat {
+        padding: 12px;
+    }
+
+    .tasks-bubble {
+        right: 12px;
+    }
+}
