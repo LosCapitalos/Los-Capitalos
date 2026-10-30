@@ -124,6 +124,9 @@ function updatePlayerInterface() {
     if (xpText) {
         xpText.textContent = `${player.xp} / 100 XP`;
     }
+if (window.LosCapitalosBusiness) {
+    window.LosCapitalosBusiness.refreshButtons();
+}
 }
 
 function addXP(amount) {
