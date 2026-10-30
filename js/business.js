@@ -82,3 +82,10 @@ if (document.readyState === "loading") {
 } else {
   renderCareers();
 }
+<strong>${formatCash(career.clickIncome)} / click</strong>
+  
+  function formatCash(value) {
+  return window.formatMoney
+    ? window.formatMoney(value)
+    : "$" + Number(value).toLocaleString("en-US");
+}
