@@ -34,6 +34,7 @@ const careers = [
 
 const careerData = careers.map((career, index) => {
   const price = 500 * Math.pow(3, index);
+
   const passiveIncome = Math.round(
     Math.pow(3, index * 0.74) * 100
   ) / 100;
@@ -48,6 +49,28 @@ const careerData = careers.map((career, index) => {
   };
 });
 
+function formatCash(value) {
+  if (window.formatMoney) {
+    return window.formatMoney(value);
+  }
+
+  const units = [
+    [1e15, "Qa"],
+    [1e12, "T"],
+    [1e9, "B"],
+    [1e6, "M"],
+    [1e3, "K"]
+  ];
+
+  for (const [limit, suffix] of units) {
+    if (value >= limit) {
+      return "$" + (value / limit).toFixed(2).replace(/\.?0+$/, "") + suffix;
+    }
+  }
+
+  return "$" + Number(value).toLocaleString("en-US");
+}
+
 function renderCareers() {
   const container = document.getElementById("business-content");
 
@@ -59,16 +82,20 @@ function renderCareers() {
   container.innerHTML = careerData.map(career => `
     <div class="career-card" data-career-id="${career.id}">
       <h3>${String(career.id).padStart(2, "0")}. ${career.title}</h3>
+
       <p class="career-description">${career.description}</p>
+
       <div class="career-price">
-        $${career.price.toLocaleString("en-US")}
+        ${formatCash(career.price)}
       </div>
+
       <div class="career-stats">
         <p>Passive Income:
-          <strong>$${career.passiveIncome.toLocaleString("en-US")} / sec</strong>
+          <strong>${formatCash(career.passiveIncome)} / sec</strong>
         </p>
+
         <p>Click Income:
-          <strong>$${career.clickIncome.toLocaleString("en-US")} / click</strong>
+          <strong>${formatCash(career.clickIncome)} / click</strong>
         </p>
       </div>
     </div>
@@ -81,11 +108,4 @@ if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", renderCareers);
 } else {
   renderCareers();
-}
-<strong>${formatCash(career.clickIncome)} / click</strong>
-  
-  function formatCash(value) {
-  return window.formatMoney
-    ? window.formatMoney(value)
-    : "$" + Number(value).toLocaleString("en-US");
 }
