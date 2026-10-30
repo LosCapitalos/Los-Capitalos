@@ -1,0 +1,186 @@
+
+/* =====================================
+   LOS CAPITALOS - HOME PAGE
+===================================== */
+
+#home {
+    padding-bottom: 100px;
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 16px;
+}
+
+/* HOME HEADER */
+
+#home .page-header {
+    margin-bottom: 5px;
+}
+
+/* BALANCE CARD */
+
+.balance-card {
+    position: relative;
+    overflow: hidden;
+    padding: 25px 20px;
+    border: 1px solid rgba(232, 184, 75, 0.3);
+    border-radius: 20px;
+    background: linear-gradient(
+        135deg,
+        #202d48 0%,
+        #121c32 60%,
+        #101827 100%
+    );
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.balance-card::after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    right: -55px;
+    top: -65px;
+    border-radius: 50%;
+    background: rgba(232, 184, 75, 0.08);
+}
+
+.balance-card h2,
+.balance-card h3 {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 10px;
+    color: #aebbd0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#player-balance {
+    position: relative;
+    z-index: 1;
+    display: block;
+    color: #f2c76b;
+    font-size: clamp(28px, 8vw, 38px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    overflow-wrap: anywhere;
+}
+
+/* EARN BUTTON */
+
+#earn-button {
+    width: 100%;
+    min-height: 55px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #f3cb73, #c99435);
+    color: #172033;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(201, 148, 53, 0.2);
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+#earn-button:active {
+    transform: scale(0.97);
+    filter: brightness(0.9);
+}
+
+/* STATISTICS */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.stat-card {
+    min-width: 0;
+    padding: 17px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    background: #19243a;
+}
+
+.stat-card h3 {
+    margin: 0 0 9px;
+    color: #9eacc2;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.stat-card p,
+.stat-card span {
+    color: #f1c66b;
+    font-size: 19px;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+}
+
+/* SHOPPING SHORTCUT */
+
+.shopping-shortcut {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 19px;
+    border: 1px solid rgba(232, 184, 75, 0.25);
+    border-radius: 17px;
+    background: linear-gradient(110deg, #29334a, #19243a);
+}
+
+.shopping-shortcut h3 {
+    margin: 0 0 5px;
+    color: #f3cb73;
+    font-size: 16px;
+}
+
+.shopping-shortcut p {
+    margin: 0;
+    color: #aebbd0;
+    font-size: 12px;
+}
+
+.shopping-shortcut button {
+    flex-shrink: 0;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 10px;
+    background: #e6b957;
+    color: #172033;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.shopping-shortcut button:active {
+    transform: scale(0.96);
+}
+
+/* MOBILE */
+
+@media (max-width: 360px) {
+    .home-content {
+        padding: 12px;
+        gap: 14px;
+    }
+
+    .stats-grid {
+        gap: 9px;
+    }
+
+    .stat-card {
+        padding: 14px 11px;
+    }
+
+    .stat-card p,
+    .stat-card span {
+        font-size: 16px;
+    }
+}
