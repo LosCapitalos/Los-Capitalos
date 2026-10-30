@@ -52,10 +52,39 @@ function savePlayer() {
     }
 }
 
-// FORMAT MONEY
+// COMPACT MONEY FORMAT
 function formatMoney(amount) {
-    return "$" + Math.floor(amount).toLocaleString("en-US");
+    const value = Number(amount) || 0;
+
+    const units = [
+        { limit: 1e18, suffix: "Qi" },
+        { limit: 1e15, suffix: "Qa" },
+        { limit: 1e12, suffix: "T" },
+        { limit: 1e9, suffix: "B" },
+        { limit: 1e6, suffix: "M" },
+        { limit: 1e3, suffix: "K" }
+    ];
+
+    for (const unit of units) {
+        if (value >= unit.limit) {
+            let result = value / unit.limit;
+
+            // Avoid awkward displays such as 1,000K
+            if (result >= 999.95) {
+                continue;
+            }
+
+            return "$" + result.toLocaleString("en-US", {
+                maximumFractionDigits: 2
+            }) + unit.suffix;
+        }
+    }
+
+    return "$" + Math.floor(value).toLocaleString("en-US");
 }
+
+// SHARE FORMATTER WITH OTHER MODULES
+window.formatMoney = formatMoney;
 
 // UPDATE PLAYER INTERFACE
 function updatePlayerInterface() {
@@ -166,11 +195,7 @@ function openPage(pageId) {
 document.querySelectorAll("[data-page]").forEach(button => {
 
     button.addEventListener("click", () => {
-
-        const pageId = button.dataset.page;
-
-        openPage(pageId);
-
+        openPage(button.dataset.page);
     });
 
 });
