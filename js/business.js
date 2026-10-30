@@ -185,6 +185,18 @@ if (!api || !container) {
         ) || null;
     }
 
+    function getClickIncome() {
+        const career = getActiveCareer();
+
+        return career ? career.clickIncome : 1;
+    }
+
+    function getPassiveIncome() {
+        const career = getActiveCareer();
+
+        return career ? career.passiveIncome : 0;
+    }
+
     function renderCareers() {
         const activeId = Number(player.activeCareerId) || 0;
 
@@ -305,9 +317,7 @@ if (!api || !container) {
 
         if (id !== activeId + 1) return;
 
-        if (player.balance < career.price) {
-            return;
-        }
+        if (player.balance < career.price) return;
 
         player.balance -= career.price;
         player.activeCareerId = career.id;
@@ -321,13 +331,6 @@ if (!api || !container) {
 
         console.log("Career purchased:", career.title);
     });
-
-    // CLICK INCOME
-    function getClickIncome() {
-        const career = getActiveCareer();
-
-        return career ? career.clickIncome : 1;
-    }
 
     // OFFLINE POPUP
     function showOfflinePopup() {
@@ -432,7 +435,6 @@ if (!api || !container) {
 
         if (!career) return;
 
-        // Wait until offline earnings have been collected.
         if (Number(player.pendingOffline) > 0) return;
 
         const now = Date.now();
@@ -468,20 +470,16 @@ if (!api || !container) {
     renderCareers();
     initializeOfflineEarnings();
 
+    window.LosCapitalosBusiness = {
+        getClickIncome,
+        getPassiveIncome,
+        refreshButtons
+    };
+
+    // Refresh Home after business system is ready.
+    api.updatePlayerInterface();
+
     setInterval(processPassiveIncome, 1000);
-
-    function getPassiveIncome() {
-    const career = getActiveCareer();
-    return career ? career.passiveIncome : 0;
-}
-
-window.LosCapitalosBusiness = {
-    getClickIncome,
-    getPassiveIncome,
-    refreshButtons
-};
-
-api.updatePlayerInterface();
 
     console.log("Los Capitalos career system initialized.");
 }
