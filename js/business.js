@@ -470,10 +470,18 @@ if (!api || !container) {
 
     setInterval(processPassiveIncome, 1000);
 
-    window.LosCapitalosBusiness = {
+    function getPassiveIncome() {
+    const career = getActiveCareer();
+    return career ? career.passiveIncome : 0;
+}
+
+window.LosCapitalosBusiness = {
     getClickIncome,
+    getPassiveIncome,
     refreshButtons
 };
+
+api.updatePlayerInterface();
 
     console.log("Los Capitalos career system initialized.");
 }
