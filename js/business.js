@@ -471,8 +471,9 @@ if (!api || !container) {
     setInterval(processPassiveIncome, 1000);
 
     window.LosCapitalosBusiness = {
-        getClickIncome
-    };
+    getClickIncome,
+    refreshButtons
+};
 
     console.log("Los Capitalos career system initialized.");
 }
