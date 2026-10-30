@@ -1,0 +1,144 @@
+
+/* =====================================
+   LOS CAPITALOS - MARKET
+===================================== */
+
+#market {
+    padding-bottom: 100px;
+}
+
+#market-content {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    padding: 16px;
+}
+
+.market-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.market-balance-card {
+    padding: 20px;
+    border: 1px solid rgba(232,184,75,.25);
+    border-radius: 18px;
+    background: linear-gradient(135deg,#293750,#172238);
+}
+
+.market-balance-card p {
+    margin: 0 0 8px;
+    color: #aebbd0;
+    font-size: 13px;
+}
+
+.market-balance-card strong {
+    color: #f2c76b;
+    font-size: 27px;
+}
+
+.market-tabs {
+    display: flex;
+    gap: 9px;
+    overflow-x: auto;
+}
+
+.market-tab {
+    flex-shrink: 0;
+    padding: 11px 16px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px;
+    background: #19243a;
+    color: #aebbd0;
+    font-weight: 700;
+}
+
+.market-tab.active {
+    background: #e6b957;
+    color: #172033;
+}
+
+.market-list {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.market-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 14px;
+    background: #19243a;
+}
+
+.market-item h3 {
+    margin: 0 0 5px;
+    color: #f2c76b;
+    font-size: 15px;
+}
+
+.market-item p {
+    margin: 0;
+    color: #9eacc2;
+    font-size: 12px;
+}
+
+.market-price {
+    color: #f2c76b;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.market-actions {
+    display: flex;
+    gap: 7px;
+}
+
+.market-actions button {
+    padding: 9px 12px;
+    border: none;
+    border-radius: 9px;
+    background: #e6b957;
+    color: #172033;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.market-actions button.sell {
+    background: #34435d;
+    color: #fff;
+}
+
+.market-chart {
+    min-height: 180px;
+    padding: 15px;
+    border-radius: 16px;
+    background: #19243a;
+}
+
+.market-chart h3 {
+    color: #f2c76b;
+    font-size: 15px;
+}
+
+.market-empty {
+    padding: 25px;
+    color: #9eacc2;
+    text-align: center;
+}
+
+@media(max-width:360px) {
+    #market-content {
+        padding: 12px;
+    }
+
+    .market-item {
+        padding: 12px;
+    }
+}
