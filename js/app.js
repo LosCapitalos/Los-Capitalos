@@ -84,6 +84,7 @@ window.formatMoney = formatMoney;
 
 function updatePlayerInterface() {
     const balance = document.getElementById("player-balance");
+   const passiveIncome = document.getElementById("passive-income");
     const earnings = document.getElementById("total-earnings");
     const profileEarnings = document.getElementById("profile-earnings");
     const shopBalance = document.getElementById("shop-balance");
@@ -126,6 +127,14 @@ function updatePlayerInterface() {
     }
 if (window.LosCapitalosBusiness) {
     window.LosCapitalosBusiness.refreshButtons();
+const business = window.LosCapitalosBusiness;
+
+if (passiveIncome) {
+    const income = business
+        ? business.getPassiveIncome()
+        : 0;
+
+    passiveIncome.textContent = formatMoney(income);
 }
 }
 
