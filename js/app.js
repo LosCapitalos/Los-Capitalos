@@ -17,7 +17,6 @@ const defaultPlayer = {
     xp: 0,
     prestige: 0,
     referrals: 0,
-
     activeCareerId: null,
     lastAccrualAt: null,
     pendingOffline: 0
@@ -67,7 +66,7 @@ function formatMoney(amount) {
 
     for (const unit of units) {
         if (value >= unit.limit) {
-            let result = value / unit.limit;
+            const result = value / unit.limit;
 
             if (result >= 999.95) continue;
 
@@ -84,7 +83,7 @@ window.formatMoney = formatMoney;
 
 function updatePlayerInterface() {
     const balance = document.getElementById("player-balance");
-   const passiveIncome = document.getElementById("passive-income");
+    const passiveIncome = document.getElementById("passive-income");
     const earnings = document.getElementById("total-earnings");
     const profileEarnings = document.getElementById("profile-earnings");
     const shopBalance = document.getElementById("shop-balance");
@@ -99,8 +98,13 @@ function updatePlayerInterface() {
     const xpProgress = document.getElementById("xp-progress");
     const xpText = document.getElementById("xp-text");
 
-    if (balance) balance.textContent = formatMoney(player.balance);
-    if (earnings) earnings.textContent = formatMoney(player.totalEarnings);
+    if (balance) {
+        balance.textContent = formatMoney(player.balance);
+    }
+
+    if (earnings) {
+        earnings.textContent = formatMoney(player.totalEarnings);
+    }
 
     if (profileEarnings) {
         profileEarnings.textContent = formatMoney(player.totalEarnings);
@@ -110,13 +114,25 @@ function updatePlayerInterface() {
         shopBalance.textContent = formatMoney(player.balance);
     }
 
-    if (headerLevel) headerLevel.textContent = player.level;
-    if (profileLevel) profileLevel.textContent = player.level;
+    if (headerLevel) {
+        headerLevel.textContent = player.level;
+    }
 
-    if (prestige) prestige.textContent = player.prestige;
-    if (profilePrestige) profilePrestige.textContent = player.prestige;
+    if (profileLevel) {
+        profileLevel.textContent = player.level;
+    }
 
-    if (referrals) referrals.textContent = player.referrals;
+    if (prestige) {
+        prestige.textContent = player.prestige;
+    }
+
+    if (profilePrestige) {
+        profilePrestige.textContent = player.prestige;
+    }
+
+    if (referrals) {
+        referrals.textContent = player.referrals;
+    }
 
     if (xpProgress) {
         xpProgress.style.width = Math.min(player.xp, 100) + "%";
@@ -125,17 +141,20 @@ function updatePlayerInterface() {
     if (xpText) {
         xpText.textContent = `${player.xp} / 100 XP`;
     }
-if (window.LosCapitalosBusiness) {
-    window.LosCapitalosBusiness.refreshButtons();
-const business = window.LosCapitalosBusiness;
 
-if (passiveIncome) {
-    const income = business
-        ? business.getPassiveIncome()
-        : 0;
+    const business = window.LosCapitalosBusiness;
 
-    passiveIncome.textContent = formatMoney(income);
-}
+    if (passiveIncome) {
+        const income = business
+            ? business.getPassiveIncome()
+            : 0;
+
+        passiveIncome.textContent = formatMoney(income);
+    }
+
+    if (business?.refreshButtons) {
+        business.refreshButtons();
+    }
 }
 
 function addXP(amount) {
@@ -177,7 +196,6 @@ const earnButton = document.getElementById("earn-button");
 
 if (earnButton) {
     earnButton.addEventListener("click", () => {
-
         const business = window.LosCapitalosBusiness;
 
         const amount = business
