@@ -1,0 +1,139 @@
+
+/* =====================================
+   LOS CAPITALOS - SHOP
+===================================== */
+
+#shop {
+    padding-bottom: 100px;
+}
+
+#shop-content {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    padding: 16px;
+}
+
+.shop-balance {
+    padding: 17px;
+    border: 1px solid rgba(232,184,75,.25);
+    border-radius: 15px;
+    background: #202d45;
+}
+
+.shop-balance span {
+    display: block;
+    margin-bottom: 7px;
+    color: #aebbd0;
+    font-size: 12px;
+}
+
+.shop-balance strong {
+    color: #f2c76b;
+    font-size: 24px;
+}
+
+.shop-categories {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 10px;
+}
+
+.shop-category {
+    padding: 13px 10px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px;
+    background: #19243a;
+    color: #aebbd0;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.shop-category.active {
+    border-color: #e6b957;
+    background: rgba(232,184,75,.13);
+    color: #f2c76b;
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
+}
+
+.shop-item {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+    padding: 13px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 15px;
+    background: linear-gradient(145deg,#202d45,#172238);
+}
+
+.shop-item-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 95px;
+    border-radius: 11px;
+    background: #111c30;
+    color: #f2c76b;
+    font-size: 35px;
+}
+
+.shop-item h3 {
+    margin: 0;
+    color: #f2c76b;
+    font-size: 14px;
+}
+
+.shop-item p {
+    margin: 0;
+    color: #9eacc2;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.shop-item-price {
+    color: #f2c76b;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.shop-buy-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(135deg,#f3cb73,#c99435);
+    color: #172033;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.shop-buy-button:disabled {
+    background: #39465b;
+    color: #9eacc2;
+}
+
+.shop-empty {
+    padding: 30px 15px;
+    color: #9eacc2;
+    text-align: center;
+}
+
+@media(max-width:360px) {
+    #shop-content {
+        padding: 12px;
+    }
+
+    .shop-grid {
+        gap: 9px;
+    }
+
+    .shop-item {
+        padding: 10px;
+    }
+}
